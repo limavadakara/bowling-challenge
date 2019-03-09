@@ -19,17 +19,36 @@ describe("Game", function() {
   });
 
   it("stores the rolls correctly on the frames", function() {
-    var frame = jasmine.createSpyObj('Frame', ['storeRoll']);
-    game.currentFrame = frame;
-
     game.roll(5);
-    expect(frame.storeRoll).toHaveBeenCalledWith(5);
+    expect(game.currentFrame.rolls[0]).toEqual(5);
   });
 
   it('starts a frame if no currentFrame is present when asked to store a roll', function(){
     game.roll(pins=6);
     expect(game.currentFrame).not.toBeNull();
+  });
 
+  it('starts a new frame if both rolls for the current frame have been exhausted', function(){
+    game.roll(pins=6);
+    var firstFrame = game.currentFrame;
+    game.roll(pins=4);
+    game.roll(pins=5);
+    expect(game.currentFrame).not.toEqual(firstFrame);
+    expect(game.frames.length).toEqual(2);
+  })
+
+  it('completes the rolls of the current frame and starts a new frame if the game roll is a strike', function(){
+    game.roll(pins=10);
+    var firstFrame = game.currentFrame;
+    game.roll(pins=4);
+    game.roll(pins=5);
+    var secondFrame = game.currentFrame;
+    expect(secondFrame).not.toEqual(firstFrame);
+    expect(game.frames.length).toEqual(2);
+    expect(firstFrame.rolls[0]).toEqual(10);
+    expect(firstFrame.rolls[1]).toEqual(0);
+    expect(secondFrame.rolls[0]).toEqual(4);
+    expect(secondFrame.rolls[1]).toEqual(5);
   })
 
 

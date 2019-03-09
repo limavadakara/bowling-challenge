@@ -22,4 +22,11 @@ describe("Frame", function() {
 
   })
 
+  it('should store 0 in the second roll alomg with the pins in the first roll if the first roll is a strike', function(){
+    frame.storeRoll(pins=10);
+    expect(frame.rolls.length).toEqual(2);
+    expect(frame.rolls[0]).toEqual(10);
+    expect(frame.rolls[1]).toEqual(0);
+  })
+
 });
