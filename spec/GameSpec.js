@@ -68,5 +68,25 @@ describe("Game", function() {
     game.roll(4);
     expect(game.score()).toEqual(37);
   });
-  
+
+  it('calculates score correctly when there is a SPARE', function(){
+    game.roll(5);
+    game.roll(4);
+    game.roll(5);
+    game.roll(5);
+    game.roll(4);
+    game.roll(6);
+    game.roll(4);
+    expect(game.score()).toEqual(41);
+  });
+
+  it('calculates score correctly when there is a SPARE and a STRIKE', function(){
+    game.roll(0);
+    game.roll(10);
+    game.roll(10);
+    game.roll(5);
+    game.roll(4);
+    expect(game.score()).toEqual(48);
+  });
+
 });

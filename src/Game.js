@@ -26,6 +26,8 @@ Game.prototype.score = function(){
       for (k = 0; k<2; k++){
         score += this.frames[i+1].rolls[k];
       }
+    } else if (this.frames[i].SPARE){
+      score += this.frames[i+1].rolls[0];
     }
     var j;
     for (j=0; j< this.frames[i].rolls.length; j++) {

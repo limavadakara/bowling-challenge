@@ -29,4 +29,11 @@ describe("Frame", function() {
     expect(frame.rolls[1]).toEqual(0);
   })
 
+  it('should store the SPARE property correctly when the 2 frame rolls result in a spare', function(){
+    frame.storeRoll(pins=4);
+    frame.storeRoll(pins=6);
+    expect(frame.rolls.length).toEqual(2);
+    expect(frame.SPARE).toEqual(true);
+  })
+
 });
