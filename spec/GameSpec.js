@@ -1,4 +1,5 @@
 describe("Game", function() {
+
   var game;
   beforeEach(function() {
       game = new Game()
@@ -16,6 +17,21 @@ describe("Game", function() {
     expect(game.frames.length).toEqual(1);
     expect(game.frames).toContain(frame);
     expect(game.currentFrame).toEqual(frame);
+  });
+
+  it("stores the rolls correctly on the frames", function() {
+    var frame = jasmine.createSpyObj('Frame', ['storeRoll']);
+    game.currentFrame = frame;
+
+    game.roll(5);
+    expect(frame.storeRoll).toHaveBeenCalledWith(5);
+    // expect(obj.method).toHaveBeenCalledWith('foo', 'bar')
+
+    // game.startFrame(frame);
+    // console.log(game.frames);
+    // expect(game.frames.length).toEqual(1);
+    // expect(game.frames).toContain(frame);
+    // expect(game.currentFrame).toEqual(frame);
   });
 
 

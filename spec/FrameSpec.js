@@ -4,10 +4,16 @@ describe("Frame", function() {
       frame = new Frame()
   });
 
-  it("should be created with 2 rolls with value of zero", function() {
-      expect(frame.roll1).toEqual(0);
-      expect(frame.roll2).toEqual(0);
+  it("should be created with an empty array of rolls", function() {
+      expect(frame.rolls.length).toEqual(0);
+      
   });
+
+  it("stores the pin rolls", function(){
+    frame.storeRoll(pins=6);
+    expect(frame.rolls.length).toEqual(1);
+    expect(frame.rolls).toContain(6);
+  })
 
 
 });

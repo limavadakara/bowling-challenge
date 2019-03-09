@@ -1,4 +1,7 @@
 Frame = function(){
-  this.roll1 = 0;
-  this.roll2 = 0;
+  this.rolls = [];
+}
+
+Frame.prototype.storeRoll = function(pins) {
+  this.rolls.push(pins);
 }
