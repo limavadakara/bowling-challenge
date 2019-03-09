@@ -35,7 +35,7 @@ describe("Game", function() {
     game.roll(pins=5);
     expect(game.currentFrame).not.toEqual(firstFrame);
     expect(game.frames.length).toEqual(2);
-  })
+  });
 
   it('completes the rolls of the current frame and starts a new frame if the game roll is a strike', function(){
     game.roll(pins=10);
@@ -49,7 +49,7 @@ describe("Game", function() {
     expect(firstFrame.rolls[1]).toEqual(0);
     expect(secondFrame.rolls[0]).toEqual(4);
     expect(secondFrame.rolls[1]).toEqual(5);
-  })
+  });
 
   it('calculates score correctly for when it is a Gutter Game', function(){
     var chances;
@@ -58,7 +58,15 @@ describe("Game", function() {
     }
     expect(game.score()).toEqual(0);
 
-  })
+  });
 
-
+  it('calculates score correctly when there is a STRIKE', function(){
+    game.roll(5);
+    game.roll(4);
+    game.roll(10);
+    game.roll(5);
+    game.roll(4);
+    expect(game.score()).toEqual(37);
+  });
+  
 });
