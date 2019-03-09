@@ -19,8 +19,7 @@ describe("Frame", function() {
     frame.storeRoll(pins=6);
     frame.storeRoll(pins=4);
     expect(function() {frame.storeRoll(5)}).toThrow("2 rolls complete for this frame. Please start a new frame");
-    
-  })
 
+  })
 
 });

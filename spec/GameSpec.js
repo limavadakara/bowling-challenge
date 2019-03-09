@@ -13,7 +13,6 @@ describe("Game", function() {
   it("starts a new frame and sets the games current frame to it", function() {
     var frame = {"object": "frame"};
     game.startFrame(frame);
-    console.log(game.frames);
     expect(game.frames.length).toEqual(1);
     expect(game.frames).toContain(frame);
     expect(game.currentFrame).toEqual(frame);
@@ -25,14 +24,13 @@ describe("Game", function() {
 
     game.roll(5);
     expect(frame.storeRoll).toHaveBeenCalledWith(5);
-    // expect(obj.method).toHaveBeenCalledWith('foo', 'bar')
-
-    // game.startFrame(frame);
-    // console.log(game.frames);
-    // expect(game.frames.length).toEqual(1);
-    // expect(game.frames).toContain(frame);
-    // expect(game.currentFrame).toEqual(frame);
   });
+
+  it('starts a frame if no currentFrame is present when asked to store a roll', function(){
+    game.roll(pins=6);
+    expect(game.currentFrame).not.toBeNull();
+
+  })
 
 
 
