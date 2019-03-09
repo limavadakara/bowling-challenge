@@ -16,5 +16,18 @@ Game.prototype.roll = function(pins){
     this.startFrame();
   }
   this.currentFrame.storeRoll(pins);
+}
 
+Game.prototype.score = function(){
+  var i;
+  var score = 0;
+  for (i=0; i<this.frames.length; i++){
+    var aFrame = this.frames[i];
+    var j;
+    for (j=0; j< aFrame.rolls.length; j++) {
+      var aRoll = aFrame.rolls[j];
+      score += aRoll;
+    }
+  }
+  return score;
 }

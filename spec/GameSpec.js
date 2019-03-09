@@ -51,6 +51,14 @@ describe("Game", function() {
     expect(secondFrame.rolls[1]).toEqual(5);
   })
 
+  it('calculates score correctly for when it is a Gutter Game', function(){
+    var chances;
+    for (chances = 0; chances <20; chances++ ){
+    game.roll(0);
+    }
+    expect(game.score()).toEqual(0);
+
+  })
 
 
 });
