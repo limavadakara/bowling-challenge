@@ -2,6 +2,7 @@ describe("Game", function() {
 
   var game;
   beforeEach(function() {
+      Frame.count = 0;
       game = new Game()
   });
 
@@ -46,12 +47,12 @@ describe("Game", function() {
     expect(secondFrame).not.toEqual(firstFrame);
     expect(game.frames.length).toEqual(2);
     expect(firstFrame.rolls[0]).toEqual(10);
-    expect(firstFrame.rolls[1]).toEqual(0);
+    expect(firstFrame.rolls.length).toEqual(1);
     expect(secondFrame.rolls[0]).toEqual(4);
     expect(secondFrame.rolls[1]).toEqual(5);
   });
 
-  it('calculates score correctly for when it is a Gutter Game', function(){
+  it('calculates score correctly for a Gutter Game', function(){
     var chances;
     for (chances = 0; chances <20; chances++ ){
     game.roll(0);
@@ -87,6 +88,23 @@ describe("Game", function() {
     game.roll(5);
     game.roll(4);
     expect(game.score()).toEqual(48);
+  });
+
+  it('calculates score correctly for a Perfect Game', function(){
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    expect(game.score()).toEqual(300);
+
   });
 
 });

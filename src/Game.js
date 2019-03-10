@@ -5,7 +5,6 @@ Game = function(){
 Game.prototype.startFrame = function(frame = new Frame()){
   this.frames.push(frame);
   this.currentFrame = frame;
-
 }
 
 Game.prototype.roll = function(pins){
@@ -22,11 +21,21 @@ Game.prototype.score = function(){
   var i;
   var score = 0;
   for (i=0; i< this.frames.length; i++){
-    if (this.frames[i].STRIKE) {
-      for (k = 0; k<2; k++){
-        score += this.frames[i+1].rolls[k];
+    if (this.frames[i].STRIKE && this.frames[i+1]) {
+      if (this.frames[i+1].STRIKE){
+        if (this.frames[i+2]){
+          score += (this.frames[i+1].rolls[0] + this.frames[i+2].rolls[0])
+        } else if ((i + 1) === 9){
+          score += this.frames[i+1].rolls[0] + this.frames[i+1].rolls[1]
+        } else {
+          score += this.frames[i+1].rolls[0]
+        }
+      } else {
+        for (k = 0; k<2; k++){
+          score += this.frames[i+1].rolls[k];
+        }
       }
-    } else if (this.frames[i].SPARE){
+    } else if (this.frames[i].SPARE && this.frames[i+1]){
       score += this.frames[i+1].rolls[0];
     }
     var j;
