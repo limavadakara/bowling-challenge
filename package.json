@@ -2,13 +2,15 @@
   "name": "bowling-challenge",
   "version": "1.0.0",
   "description": "Bowling Challenge =================",
-  "main": "index.js",
   "directories": {
     "doc": "docs",
     "lib": "lib"
   },
+  "devDependencies": {
+    "jshint": "^2.10.1"
+  },
   "scripts": {
-    "test": "test"
+    "test": "jshint hello.js"
   },
   "repository": {
     "type": "git",
