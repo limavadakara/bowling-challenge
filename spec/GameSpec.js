@@ -107,7 +107,7 @@ describe("Game", function() {
 
   });
 
-  it('calculates score correctly for a Perfect Game', function(){
+  it('calculates score correctly for a game with strikes and spares', function(){
     game.roll(10);
     game.roll(10);
     game.roll(5);
@@ -118,6 +118,27 @@ describe("Game", function() {
     game.roll(3);
     game.roll(10);
     expect(game.score()).toEqual(108);
+
+  });
+
+  it('calculates score correctly for a game with strikes and spares and ending with a spare', function(){
+    game.roll(10);
+    game.roll(10);
+    game.roll(5);
+    game.roll(5);
+    game.roll(6);
+    game.roll(4);
+    game.roll(7);
+    game.roll(3);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(9);
+    game.roll(1);
+    game.roll(3);
+    game.roll(7);
+    game.roll(10);
+    expect(game.score()).toEqual(210);
 
   });
 
