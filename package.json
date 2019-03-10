@@ -7,10 +7,11 @@
     "lib": "lib"
   },
   "devDependencies": {
+    "eslint": "^5.15.1",
     "jshint": "^2.10.1"
   },
   "scripts": {
-    "test": "jshint hello.js"
+    "test": "eslint hello.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,6 @@
   "bugs": {
     "url": "https://github.com/limavadakara/bowling-challenge/issues"
   },
-  "homepage": "https://github.com/limavadakara/bowling-challenge#readme"
+  "homepage": "https://github.com/limavadakara/bowling-challenge#readme",
+  "dependencies": {}
 }
