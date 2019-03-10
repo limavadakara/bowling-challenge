@@ -11,7 +11,7 @@
     "jshint": "^2.10.1"
   },
   "scripts": {
-    "test": "eslint hello.js"
+    "test": "eslint ./spec/GameSpec.js"
   },
   "repository": {
     "type": "git",
