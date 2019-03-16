@@ -28,29 +28,64 @@ Game.prototype.scoreGame = function(){
 
 Game.prototype.scoreFrame = function(frameNumber){
   var frameScore = 0;
-  var j;
-  for (j=0; j< this.frames[frameNumber].rolls.length; j++) {
-    frameScore += this.frames[frameNumber].rolls[j];
+  frameScore += this.scoreFrameRolls(frameNumber);
+
+  if (this.frames[frameNumber].STRIKE) {
+
+    frameScore += this.strikeBonus(frameNumber);
+
+  } else if (this.frames[frameNumber].SPARE){
+
+    frameScore += this.spareBonus(frameNumber);
+
   }
 
-  if (this.frames[frameNumber].STRIKE && this.frames[frameNumber+1]) {
-    if (this.frames[frameNumber+1].STRIKE){
-      if (this.frames[frameNumber+2]){
-        frameScore += (this.frames[frameNumber+1].rolls[0] + this.frames[frameNumber+2].rolls[0])
-      } else if ((frameNumber + 1) === 9){
-        frameScore += this.frames[frameNumber+1].rolls[0] + this.frames[frameNumber+1].rolls[1]
-      } else {
-        frameScore += this.frames[frameNumber+1].rolls[0]
-      }
-    } else {
-      for (k = 0; k<2; k++){
-        frameScore += this.frames[frameNumber+1].rolls[k];
-      }
-    }
-  } else if (this.frames[frameNumber].SPARE && this.frames[frameNumber+1]){
-    frameScore += this.frames[frameNumber+1].rolls[0];
-  }
   this.frames[frameNumber].frameScore = frameScore;
   return frameScore;
+}
 
+Game.prototype.strikeBonus = function(frameNumber){
+  var strikeBonus = 0;
+  var currentFrame = this.frames[frameNumber];
+  var nextFrame = this.frames[frameNumber + 1];
+  var frameAfterNext = this.frames[frameNumber + 2]
+  if (nextFrame) {
+    if (nextFrame.STRIKE){
+      if (frameAfterNext){
+        strikeBonus += (nextFrame.rolls[0] + frameAfterNext.rolls[0])
+      } else if (nextFrame.LASTFRAME) {
+        strikeBonus += nextFrame.rolls[0] + nextFrame.rolls[1]
+      } else {
+        strikeBonus += nextFrame.rolls[0]
+      }
+    } else {
+      var rollNumberOfNextFrame;
+      for (rollNumberOfNextFrame = 0;
+            rollNumberOfNextFrame < nextFrame.rolls.length;
+            rollNumberOfNextFrame++){
+        strikeBonus += nextFrame.rolls[rollNumberOfNextFrame];
+      }
+    }
+  }
+  return strikeBonus;
+}
+
+Game.prototype.spareBonus = function(frameNumber){
+  var spareBonus = 0;
+  var currentFrame = this.frames[frameNumber];
+  var nextFrame = this.frames[frameNumber + 1];
+  if (nextFrame){
+    spareBonus += nextFrame.rolls[0];
+  }
+  return spareBonus;
+}
+
+Game.prototype.scoreFrameRolls = function(frameNumber){
+  var rollScore = 0;
+  var rollNumber;
+  var currentFrame = this.frames[frameNumber];
+  for (rollNumber=0; rollNumber < currentFrame.rolls.length; rollNumber++) {
+    rollScore += currentFrame.rolls[rollNumber];
+  }
+  return rollScore;
 }

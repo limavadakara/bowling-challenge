@@ -186,6 +186,7 @@ describe("Game", function() {
     game.roll(10);
     game.roll(10);
     expect(game.scoreFrame(9)).toEqual(30);
+    expect(game.scoreFrameRolls(9)).toEqual(30);
 
   });
 
@@ -209,7 +210,36 @@ describe("Game", function() {
     expect(game.scoreFrame(9)).toEqual(20);
     expect(game.scoreGame()).toEqual(210);
     expect(game.frames[9].frameScore).toEqual(20);
+    expect(game.spareBonus(3)).toEqual(7);
+    expect(game.scoreFrameRolls(3)).toEqual(10);
+    expect(game.scoreFrameRolls(9)).toEqual(20);
+    expect(game.scoreFrameRolls(5)).toEqual(10);
 
   });
+
+  it('calculates STRIKE bonus correctly if the frame of the input number is a STRIKE and the next frame is also a STRIKE', function(){
+    game.roll(10);
+    game.roll(10);
+    game.roll(5);
+    game.roll(5);
+    game.roll(6);
+    game.roll(4);
+    game.roll(7);
+    game.roll(3);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(9);
+    game.roll(1);
+    game.roll(3);
+    game.roll(7);
+    game.roll(10);
+    expect(game.scoreGame()).toEqual(210);
+    expect(game.strikeBonus(5)).toEqual(20);
+    expect(game.frames[5].frameScore).toEqual(30);
+
+
+  });
+
 
 });
