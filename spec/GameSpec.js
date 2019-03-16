@@ -207,6 +207,8 @@ describe("Game", function() {
     game.roll(7);
     game.roll(10);
     expect(game.scoreFrame(9)).toEqual(20);
+    expect(game.scoreGame()).toEqual(210);
+    expect(game.frames[9].frameScore).toEqual(20);
 
   });
 

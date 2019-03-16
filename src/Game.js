@@ -50,6 +50,7 @@ Game.prototype.scoreFrame = function(frameNumber){
   } else if (this.frames[frameNumber].SPARE && this.frames[frameNumber+1]){
     frameScore += this.frames[frameNumber+1].rolls[0];
   }
+  this.frames[frameNumber].frameScore = frameScore;
   return frameScore;
 
 }

@@ -2,6 +2,7 @@
 Frame = function(){
   Frame.count = (Frame.count || 0) + 1;
   this.rolls = [];
+  this.frameScore = 0;
   this.MAXROLLS = 2;
   this.STRIKE = false;
   this.SPARE = false;
