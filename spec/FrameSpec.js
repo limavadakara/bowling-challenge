@@ -37,10 +37,4 @@ describe("Frame", function() {
     expect(frame.SPARE).toEqual(true);
   })
 
-  it('sets the LASTFRAME property of the 10th frame to true', function(){
-    frame.storeRoll(pins=4);
-    frame.storeRoll(pins=6);
-    expect(frame.rolls.length).toEqual(2);
-    expect(frame.SPARE).toEqual(true);
-  })
 });

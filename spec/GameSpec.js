@@ -57,7 +57,7 @@ describe("Game", function() {
     for (chances = 0; chances <20; chances++ ){
     game.roll(0);
     }
-    expect(game.score()).toEqual(0);
+    expect(game.scoreGame()).toEqual(0);
 
   });
 
@@ -67,7 +67,7 @@ describe("Game", function() {
     game.roll(10);
     game.roll(5);
     game.roll(4);
-    expect(game.score()).toEqual(37);
+    expect(game.scoreGame()).toEqual(37);
   });
 
   it('calculates score correctly when there is a SPARE', function(){
@@ -78,7 +78,7 @@ describe("Game", function() {
     game.roll(4);
     game.roll(6);
     game.roll(4);
-    expect(game.score()).toEqual(41);
+    expect(game.scoreGame()).toEqual(41);
   });
 
   it('calculates score correctly when there is a SPARE and a STRIKE', function(){
@@ -87,7 +87,7 @@ describe("Game", function() {
     game.roll(10);
     game.roll(5);
     game.roll(4);
-    expect(game.score()).toEqual(48);
+    expect(game.scoreGame()).toEqual(48);
   });
 
   it('calculates score correctly for a Perfect Game', function(){
@@ -103,7 +103,9 @@ describe("Game", function() {
     game.roll(10);
     game.roll(10);
     game.roll(10);
-    expect(game.score()).toEqual(300);
+    expect(game.scoreGame()).toEqual(300);
+    expect(Frame.count).toEqual(10);
+    expect(game.frames[9].LASTFRAME).toEqual(true);
 
   });
 
@@ -117,7 +119,7 @@ describe("Game", function() {
     game.roll(7);
     game.roll(3);
     game.roll(10);
-    expect(game.score()).toEqual(108);
+    expect(game.scoreGame()).toEqual(108);
 
   });
 
@@ -138,7 +140,73 @@ describe("Game", function() {
     game.roll(3);
     game.roll(7);
     game.roll(10);
-    expect(game.score()).toEqual(210);
+    expect(game.scoreGame()).toEqual(210);
+
+  });
+
+  it('calculates score correctly for a given frame when it is a STRIKE and has a SPARE following it', function(){
+    game.roll(10);
+    game.roll(10);
+    game.roll(5);
+    game.roll(5);
+    game.roll(6);
+    game.roll(4);
+    game.roll(7);
+    game.roll(3);
+    game.roll(10);
+    expect(game.scoreFrame(1)).toEqual(20);
+
+  });
+
+  it('calculates score correctly for a given frame when it is a SPARE and followed by a STRIKE', function(){
+    game.roll(10);
+    game.roll(10);
+    game.roll(5);
+    game.roll(5);
+    game.roll(6);
+    game.roll(4);
+    game.roll(7);
+    game.roll(3);
+    game.roll(10);
+    expect(game.scoreFrame(4)).toEqual(20);
+
+  });
+
+  it('calculates score correctly for a given frame when it is a STRIKE and the 10th frame of a perfect game', function(){
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    expect(game.scoreFrame(9)).toEqual(30);
+
+  });
+
+  it('calculates score correctly for a given frame when it is a SPARE and the 10th frame of a game', function(){
+    game.roll(10);
+    game.roll(10);
+    game.roll(5);
+    game.roll(5);
+    game.roll(6);
+    game.roll(4);
+    game.roll(7);
+    game.roll(3);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(9);
+    game.roll(1);
+    game.roll(3);
+    game.roll(7);
+    game.roll(10);
+    expect(game.scoreFrame(9)).toEqual(20);
 
   });
 

@@ -17,31 +17,39 @@ Game.prototype.roll = function(pins){
   this.currentFrame.storeRoll(pins);
 }
 
-Game.prototype.score = function(){
-  var i;
-  var score = 0;
-  for (i=0; i< this.frames.length; i++){
-    if (this.frames[i].STRIKE && this.frames[i+1]) {
-      if (this.frames[i+1].STRIKE){
-        if (this.frames[i+2]){
-          score += (this.frames[i+1].rolls[0] + this.frames[i+2].rolls[0])
-        } else if ((i + 1) === 9){
-          score += this.frames[i+1].rolls[0] + this.frames[i+1].rolls[1]
-        } else {
-          score += this.frames[i+1].rolls[0]
-        }
-      } else {
-        for (k = 0; k<2; k++){
-          score += this.frames[i+1].rolls[k];
-        }
-      }
-    } else if (this.frames[i].SPARE && this.frames[i+1]){
-      score += this.frames[i+1].rolls[0];
-    }
-    var j;
-    for (j=0; j< this.frames[i].rolls.length; j++) {
-      score += this.frames[i].rolls[j];
-    }
+Game.prototype.scoreGame = function(){
+  var frameNumber;
+  var gameScore = 0;
+  for (frameNumber=0; frameNumber< this.frames.length; frameNumber++){
+    gameScore += this.scoreFrame(frameNumber)
   }
-  return score;
+  return gameScore;
+}
+
+Game.prototype.scoreFrame = function(frameNumber){
+  var frameScore = 0;
+  var j;
+  for (j=0; j< this.frames[frameNumber].rolls.length; j++) {
+    frameScore += this.frames[frameNumber].rolls[j];
+  }
+
+  if (this.frames[frameNumber].STRIKE && this.frames[frameNumber+1]) {
+    if (this.frames[frameNumber+1].STRIKE){
+      if (this.frames[frameNumber+2]){
+        frameScore += (this.frames[frameNumber+1].rolls[0] + this.frames[frameNumber+2].rolls[0])
+      } else if ((frameNumber + 1) === 9){
+        frameScore += this.frames[frameNumber+1].rolls[0] + this.frames[frameNumber+1].rolls[1]
+      } else {
+        frameScore += this.frames[frameNumber+1].rolls[0]
+      }
+    } else {
+      for (k = 0; k<2; k++){
+        frameScore += this.frames[frameNumber+1].rolls[k];
+      }
+    }
+  } else if (this.frames[frameNumber].SPARE && this.frames[frameNumber+1]){
+    frameScore += this.frames[frameNumber+1].rolls[0];
+  }
+  return frameScore;
+
 }
