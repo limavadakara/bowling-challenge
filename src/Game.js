@@ -22,6 +22,7 @@ Game.prototype.scoreGame = function(){
   var gameScore = 0;
   for (frameNumber=0; frameNumber< this.frames.length; frameNumber++){
     gameScore += this.scoreFrame(frameNumber)
+    console.log(this.frames[frameNumber]);
   }
   return gameScore;
 }
@@ -29,18 +30,13 @@ Game.prototype.scoreGame = function(){
 Game.prototype.scoreFrame = function(frameNumber){
   var frameScore = 0;
   frameScore += this.scoreFrameRolls(frameNumber);
-
   if (this.frames[frameNumber].STRIKE) {
-
     frameScore += this.strikeBonus(frameNumber);
-
   } else if (this.frames[frameNumber].SPARE){
-
     frameScore += this.spareBonus(frameNumber);
-
   }
-
   this.frames[frameNumber].frameScore = frameScore;
+
   return frameScore;
 }
 
@@ -83,9 +79,9 @@ Game.prototype.spareBonus = function(frameNumber){
 Game.prototype.scoreFrameRolls = function(frameNumber){
   var rollScore = 0;
   var rollNumber;
-  var currentFrame = this.frames[frameNumber];
-  for (rollNumber=0; rollNumber < currentFrame.rolls.length; rollNumber++) {
-    rollScore += currentFrame.rolls[rollNumber];
+  var thiscurrentFrame = this.frames[frameNumber];
+  for (rollNumber=0; rollNumber < thiscurrentFrame.rolls.length; rollNumber++) {
+    rollScore += thiscurrentFrame.rolls[rollNumber];
   }
   return rollScore;
 }
