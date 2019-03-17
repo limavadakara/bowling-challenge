@@ -4,7 +4,16 @@ $(document).ready(function() {
 
   $('#roll').on('click', (function() {
     var pins = parseInt($('input:radio[name=rollPins]:checked').val(), 10);
-    game.roll(pins);
+    if (isNaN(pins)){
+      alert("You must select the number of pins to roll");
+    }
+    else { 
+    try{
+      game.roll(pins)
+      } catch(err) {
+
+            $('#CompletionMessage').text("Game Finished");
+      }
     game.scoreGame();
     var theFrame
     for (var noFrames = 0; noFrames < game.frames.length; noFrames++){
@@ -25,7 +34,21 @@ $(document).ready(function() {
 
         $('#frame'+framenumber+'rollbox'+rollnumber).text(game.frames[framenumber].rolls[rollnumber])
 
+        if(game.frames[framenumber].LASTFRAME && (rollnumber + 1 === game.frames[framenumber].MAXROLLS)){
+
+          $('#CompletionMessage').text("Game Finished");
+          $('.rollPins').attr('checked', false);
+          $('.rollPins').attr('disabled', true);
+          $('#roll').attr('disabled', true);
+          var playAgain = document.createElement("button");
+          playAgain.id = "restart";
+          playAgain.innerText = "Restart Game"
+          document.getElementById('RestartGame').appendChild(playAgain)
+          $('#restart').on('click', function(){
+            document.location.reload(true);
+          })
+        }
       }
-    }
+    }}
   }))
 })

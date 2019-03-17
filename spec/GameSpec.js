@@ -241,5 +241,25 @@ describe("Game", function() {
 
   });
 
+  it('Throws error if attempt is made to play more than 10 frames', function(){
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    game.roll(10);
+    expect(game.scoreGame()).toEqual(300);
+    expect(Frame.count).toEqual(10);
+    expect(game.frames[9].LASTFRAME).toEqual(true);
+    expect(function() {game.roll()}).toThrow("Game Finished");
+
+  });
+
 
 });

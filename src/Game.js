@@ -1,5 +1,6 @@
 Game = function(){
   this.frames = [];
+
 }
 
 Game.prototype.startFrame = function(frame = new Frame()){
@@ -8,11 +9,15 @@ Game.prototype.startFrame = function(frame = new Frame()){
 }
 
 Game.prototype.roll = function(pins){
+
   if (!this.currentFrame){
       this.startFrame();
   }
   else if (this.currentFrame.rolls.length === this.currentFrame.MAXROLLS) {
-    this.startFrame();
+    if (this.currentFrame.LASTFRAME){
+      throw "Game Finished"
+    }
+    else { this.startFrame()}
   }
   this.currentFrame.storeRoll(pins);
 }
