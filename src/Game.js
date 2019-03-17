@@ -25,15 +25,18 @@ Game.prototype.roll = function(pins){
 Game.prototype.scoreGame = function(){
   var frameNumber;
   var gameScore = 0;
+
   for (frameNumber=0; frameNumber< this.frames.length; frameNumber++){
     gameScore += this.scoreFrame(frameNumber)
     console.log(this.frames[frameNumber]);
   }
+  console.log(gameScore);
   return gameScore;
 }
 
 Game.prototype.scoreFrame = function(frameNumber){
   var frameScore = 0;
+
   frameScore += this.scoreFrameRolls(frameNumber);
   if (this.frames[frameNumber].STRIKE) {
     frameScore += this.strikeBonus(frameNumber);
@@ -48,6 +51,7 @@ Game.prototype.scoreFrame = function(frameNumber){
 Game.prototype.strikeBonus = function(frameNumber){
   var strikeBonus = 0;
   var currentFrame = this.frames[frameNumber];
+  if (currentFrame.LASTFRAME) {return strikeBonus}
   var nextFrame = this.frames[frameNumber + 1];
   var frameAfterNext = this.frames[frameNumber + 2]
   if (nextFrame) {
@@ -68,6 +72,9 @@ Game.prototype.strikeBonus = function(frameNumber){
       }
     }
   }
+  console.log("lastframe "+currentFrame.LASTFRAME)
+  console.log("frame count "+Frame.count)
+  console.log("strike bonus "+strikeBonus)
   return strikeBonus;
 }
 
@@ -88,5 +95,6 @@ Game.prototype.scoreFrameRolls = function(frameNumber){
   for (rollNumber=0; rollNumber < thiscurrentFrame.rolls.length; rollNumber++) {
     rollScore += thiscurrentFrame.rolls[rollNumber];
   }
+  console.log("frame rolls " + rollScore);
   return rollScore;
 }

@@ -11,6 +11,7 @@ Frame = function(){
 Frame.prototype.storeRoll = function(pins) {
   if (Frame.count === 10){
     this.LASTFRAME = true;
+    
   }
   if (pins === 10 && this.rolls.length === 0){
     this.STRIKE = true;
