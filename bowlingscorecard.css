@@ -1,0 +1,39 @@
+.page {
+  height: 100%
+}
+.center-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rollback-flex {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+}
+
+.row {
+  flex-direction: row
+}
+
+.column {
+  flex-direction: column
+}
+.frame {
+  margin-right: 10px;
+  width: 10%;
+  height:100px;
+  border-style: solid;
+  border-color: black;
+  border-width: 3px 3px 3px 3px;
+}
+.rollbox {
+
+  width: 20%;
+  height:30px;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px 1px 1px 1px;
+
+}
